@@ -1,7 +1,11 @@
+// src/PredictionForm.js
 import React, { useState } from 'react';
 
 function PredictionForm() {
-  const [input, setInput] = useState('');
+  const [athletes, setAthletes] = useState('');
+  const [hosts, setHosts] = useState('');
+  const [medals, setMedals] = useState('');
+  const [results, setResults] = useState('');
   const [predictions, setPredictions] = useState(null);
 
   const handleSubmit = async (event) => {
@@ -12,7 +16,7 @@ function PredictionForm() {
       headers: {
         'Content-Type': 'application/json',
       },
-      body: JSON.stringify({ input }),
+      body: JSON.stringify({ athletes, hosts, medals, results }),
     });
 
     const data = await response.json();
@@ -22,11 +26,38 @@ function PredictionForm() {
   return (
     <div>
       <form onSubmit={handleSubmit}>
-        <input
-          type="text"
-          value={input}
-          onChange={(e) => setInput(e.target.value)}
-        />
+        <div>
+          <label>Athletes</label>
+          <input
+            type="text"
+            value={athletes}
+            onChange={(e) => setAthletes(e.target.value)}
+          />
+        </div>
+        <div>
+          <label>Hosts</label>
+          <input
+            type="text"
+            value={hosts}
+            onChange={(e) => setHosts(e.target.value)}
+          />
+        </div>
+        <div>
+          <label>Medals</label>
+          <input
+            type="text"
+            value={medals}
+            onChange={(e) => setMedals(e.target.value)}
+          />
+        </div>
+        <div>
+          <label>Results</label>
+          <input
+            type="text"
+            value={results}
+            onChange={(e) => setResults(e.target.value)}
+          />
+        </div>
         <button type="submit">Predict</button>
       </form>
       {predictions && (
