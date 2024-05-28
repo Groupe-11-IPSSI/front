@@ -1,8 +1,8 @@
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import { Container, CssBaseline } from "@mui/material";
-
-import HomePage from "./pages/HomePage";
 import Header from "./components/Header";
+import HomePage from "./pages/HomePage";
+import WinterGames from "./pages/WinterGames";
 import SummerGames from "./pages/SummerGames";
 import Analysis from "./components/Analysis";
 import OlympicFacts from "./pages/OlympicFacts";
@@ -16,6 +16,7 @@ function App() {
       <Container>
         <Routes>
           <Route path="/" element={<HomePage />} />
+          <Route path="/winter" element={<WinterGames />} />
           <Route path="/summer" element={<SummerGames />} />
           <Route path="/analysis" element={<Analysis />} />
           <Route path="/facts" element={<OlympicFacts />} />
