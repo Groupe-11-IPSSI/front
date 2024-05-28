@@ -13,7 +13,15 @@ function OlympicFacts() {
         Fact 2: The five rings of the Olympic logo represent the five
         continents.
       </Typography>
-      {/* Ajoutez d'autres faits intéressants */}
+      <Typography variant="body1">
+        Fact 3: The Olympic Games have been held in 23 countries.
+      </Typography>
+      <Typography variant="body1">
+        Fact 4: The Olympic Games have been held in 42 cities.
+      </Typography>
+      <Typography variant="body1">
+        Fact 5: The Olympic Games have been held 50 times.
+      </Typography>
     </Box>
   );
 }

@@ -14,7 +14,6 @@ function Predictions() {
   const predictions = [
     { sport: "Athletics", age: 23, height: 180, weight: 70, medals: "Gold" },
     { sport: "Swimming", age: 21, height: 175, weight: 68, medals: "Silver" },
-    // Ajoutez d'autres prédictions
   ];
 
   return (
