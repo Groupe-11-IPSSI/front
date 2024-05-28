@@ -1,7 +1,8 @@
+// src/PredictionForm.js
 import React, { useState, useEffect } from 'react';
 import { Button, Container, Typography, Autocomplete, TextField } from '@mui/material';
 
-function PredictionForm() {
+function PredictionForm({ addPrediction }) {
   const [athletes, setAthletes] = useState([]);
   const [medals, setMedals] = useState([]);
   const [selectedAthlete, setSelectedAthlete] = useState(null);
@@ -24,29 +25,26 @@ function PredictionForm() {
     fetchMedals();
   }, []);
 
-  const handlePredict = async () => {
-    const response = await fetch('http://localhost:5000/predict', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({
-        athlete: selectedAthlete,
-        medal: selectedMedal,
-      }),
-    });
+  const handlePredict = () => {
+    const newPrediction = {
+      sport: selectedAthlete, // Placeholder, replace with the actual sport if available
+      age: Math.floor(Math.random() * 10) + 20, // Placeholder, replace with actual age prediction logic
+      height: Math.floor(Math.random() * 30) + 150, // Placeholder, replace with actual height prediction logic
+      weight: Math.floor(Math.random() * 20) + 50, // Placeholder, replace with actual weight prediction logic
+      medals: selectedMedal,
+    };
 
-    if (response.ok) {
-      alert('Prediction made successfully!');
-    } else {
-      alert('Failed to make prediction.');
-    }
+    addPrediction(newPrediction);
+
+    // Reset selections
+    setSelectedAthlete(null);
+    setSelectedMedal(null);
   };
 
   return (
     <Container>
       <Typography variant="h4" component="h2" gutterBottom>
-        Faire une Prédiction
+        Make a Prediction
       </Typography>
       <Autocomplete
         options={athletes}
@@ -65,7 +63,7 @@ function PredictionForm() {
         style={{ marginBottom: 20 }}
       />
       <Button variant="contained" color="primary" onClick={handlePredict} disabled={!selectedAthlete || !selectedMedal}>
-        Prédire
+        Predict
       </Button>
     </Container>
   );
