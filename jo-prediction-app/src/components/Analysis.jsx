@@ -11,7 +11,7 @@ import {
   Title,
   Tooltip,
 } from "chart.js";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Bar, Line, Pie } from "react-chartjs-2";
 
 ChartJS.register(
@@ -28,57 +28,23 @@ ChartJS.register(
 
 function Analysis() {
   // Exemples de données en dur
-  const data = [
-    {
-      country_name: "USA",
-      medal_type: "GOLD",
-      count: 30,
-    },
-    {
-      country_name: "USA",
-      medal_type: "SILVER",
-      count: 20,
-    },
-    {
-      country_name: "USA",
-      medal_type: "BRONZE",
-      count: 10,
-    },
-    {
-      country_name: "China",
-      medal_type: "GOLD",
-      count: 25,
-    },
-    {
-      country_name: "China",
-      medal_type: "SILVER",
-      count: 18,
-    },
-    {
-      country_name: "China",
-      medal_type: "BRONZE",
-      count: 12,
-    },
-    {
-      country_name: "UK",
-      medal_type: "GOLD",
-      count: 22,
-    },
-    {
-      country_name: "UK",
-      medal_type: "SILVER",
-      count: 15,
-    },
-    {
-      country_name: "UK",
-      medal_type: "BRONZE",
-      count: 8,
-    },
-  ];
+
+  const [data, setData] = useState([]);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      const response = await fetch(`http://localhost:5000/medals`);
+      const data = await response.json();
+      console.log(data);
+      setData(data);
+    };
+    fetchData();
+  }, []);
 
   const processChartData = () => {
     const countries = {};
     data.forEach((item) => {
+      console.log(item.medal_type)
       if (!countries[item.country_name]) {
         countries[item.country_name] = { GOLD: 0, SILVER: 0, BRONZE: 0 };
       }

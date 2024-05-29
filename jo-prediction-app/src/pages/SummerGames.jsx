@@ -20,7 +20,7 @@ function App() {
   const [selectedMedal, setSelectedMedal] = useState(null);
 
   const fetchMedals = async (selectedMedal) => {
-    const response = await fetch(`http://localhost:5000/medals?game_season=Winter${selectedMedal ? `&medal_type=${selectedMedal}` : ""}`);
+    const response = await fetch(`http://localhost:5000/medals?game_season=Summer${selectedMedal ? `&medal_type=${selectedMedal}` : ""}`);
     const data = await response.json();
     setPredictions(data);
   };
@@ -41,7 +41,7 @@ function App() {
   return (
     <Container>
       <Typography variant="h2" component="h1" gutterBottom>
-        Jeux d'H
+        Jeux Olympique d'Été
       </Typography>
       <Box mt={5}>
         <Typography variant="h5" gutterBottom>
