@@ -37,9 +37,9 @@ function WinterGames() {
         margin="normal"
         fullWidth
       >
-        <MenuItem value="Gold">Gold</MenuItem>
-        <MenuItem value="Silver">Silver</MenuItem>
-        <MenuItem value="Bronze">Bronze</MenuItem>
+        <MenuItem value="GOLD">Gold</MenuItem>
+        <MenuItem value="SILVER">Silver</MenuItem>
+        <MenuItem value="BRONZE">Bronze</MenuItem>
       </TextField>
       <TextField
         label="Year"

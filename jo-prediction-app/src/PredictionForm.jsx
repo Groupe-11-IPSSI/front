@@ -1,27 +1,30 @@
-// src/PredictionForm.js
 import React, { useState, useEffect } from 'react';
 import { Button, Container, Typography, Autocomplete, TextField } from '@mui/material';
 
 function PredictionForm({ addPrediction }) {
   const [athletes, setAthletes] = useState([]);
-  const [medals, setMedals] = useState([]);
+  // const [medals, setMedals] = useState([]);
   const [selectedAthlete, setSelectedAthlete] = useState(null);
   const [selectedMedal, setSelectedMedal] = useState(null);
+  const medals = ["GOLD", "SILVER", "BRONZE"];
 
   useEffect(() => {
-    const fetchAthletes = async () => {
-      const response = await fetch('http://localhost:5000/athletes');
-      const data = await response.json();
-      setAthletes(data);
-    };
+    // const fetchAthletes = async () => {
+    //   const response = await fetch('http://localhost:5000/athletes');
+    //   const data = await response.json();
+    //   setAthletes(data);
+    // };
 
     const fetchMedals = async () => {
-      const response = await fetch('http://localhost:5000/medals');
+      const response = await fetch('http://localhost:5000/medals?game_season=Summer');
+      // console.log(response)
       const data = await response.json();
-      setMedals(data);
+      console.log(data);
+      // setMedals(data);
     };
 
-    fetchAthletes();
+
+    // fetchAthletes();
     fetchMedals();
   }, []);
 
@@ -44,7 +47,7 @@ function PredictionForm({ addPrediction }) {
   return (
     <Container>
       <Typography variant="h4" component="h2" gutterBottom>
-        Make a Prediction
+        Faire une Prédiction
       </Typography>
       <Autocomplete
         options={athletes}
@@ -57,7 +60,7 @@ function PredictionForm({ addPrediction }) {
       <Autocomplete
         options={medals}
         getOptionLabel={(option) => option}
-        renderInput={(params) => <TextField {...params} label="Select Medal" variant="outlined" />}
+        renderInput={(params) => <TextField {...params} label="Selectionner Medailles" variant="outlined" />}
         value={selectedMedal}
         onChange={(event, newValue) => setSelectedMedal(newValue)}
         style={{ marginBottom: 20 }}
