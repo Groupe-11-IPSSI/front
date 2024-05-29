@@ -9,6 +9,7 @@ import {
   TableRow,
   Paper,
 } from "@mui/material";
+import PredictionForm from "../PredictionForm";
 
 function Predictions() {
   const predictions = [
@@ -19,8 +20,9 @@ function Predictions() {
   return (
     <Box mt={5}>
       <Typography variant="h4" gutterBottom>
-        Predictions for JO 2024
+        Prédictions JO 2024
       </Typography>
+      <PredictionForm addPrediction={predictions} />
       <TableContainer component={Paper}>
         <Table>
           <TableHead>
