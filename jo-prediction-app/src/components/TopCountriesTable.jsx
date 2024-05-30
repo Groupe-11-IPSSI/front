@@ -10,20 +10,7 @@ import {
   Paper,
 } from "@mui/material";
 
-const topCountries = [
-  { country: "USA", totalMedals: 120 },
-  { country: "China", totalMedals: 110 },
-  { country: "Russia", totalMedals: 90 },
-  { country: "Germany", totalMedals: 85 },
-  { country: "Japan", totalMedals: 80 },
-  { country: "Australia", totalMedals: 70 },
-  { country: "France", totalMedals: 60 },
-  { country: "Italy", totalMedals: 55 },
-  { country: "Great Britain", totalMedals: 50 },
-  { country: "Canada", totalMedals: 45 },
-];
-
-const TopCountriesTable = () => {
+const TopCountriesTable = ({ predictions }) => {
   return (
     <Box mt={5} p={3}>
       <Typography
@@ -32,7 +19,7 @@ const TopCountriesTable = () => {
         align="center"
         sx={{ marginBottom: "2rem" }}
       >
-        Top 10 Predicted Countries
+        Top 25 Predicted Countries
       </Typography>
       <TableContainer component={Paper}>
         <Table>
@@ -40,13 +27,23 @@ const TopCountriesTable = () => {
             <TableRow>
               <TableCell>Country</TableCell>
               <TableCell>Total Medals</TableCell>
+              <TableCell>Total Gold Medals</TableCell>
+              <TableCell>Total Silver Medals</TableCell>
+              <TableCell>Total Bronze Medals</TableCell>
             </TableRow>
           </TableHead>
           <TableBody>
-            {topCountries.map((country, index) => (
+            {predictions.map((country, index) => (
               <TableRow key={index}>
-                <TableCell>{country.country}</TableCell>
-                <TableCell>{country.totalMedals}</TableCell>
+                <TableCell>{country.country_name}</TableCell>
+                <TableCell>
+                  {country.predicted_gold_medals +
+                    country.predicted_silver_medals +
+                    country.predicted_bronze_medals}
+                </TableCell>
+                <TableCell>{country.predicted_gold_medals}</TableCell>
+                <TableCell>{country.predicted_silver_medals}</TableCell>
+                <TableCell>{country.predicted_bronze_medals}</TableCell>
               </TableRow>
             ))}
           </TableBody>

@@ -1,14 +1,33 @@
-import { Box } from "@mui/material";
+import { useEffect, useState } from "react";
 import TopCountriesTable from "../components/TopCountriesTable";
 import CountryMedalChart from "../components/CountryMedalChart";
 
-function Predictions() {
+const Predictions = () => {
+  const [predictions, setPredictions] = useState([]);
+  const [isLoading, setIsLoading] = useState(true);
+
+  const getPredictions = async () => {
+    const response = await fetch("http://localhost:5000/predict");
+
+    setPredictions(await response.json());
+    setIsLoading(false);
+  };
+
+  useEffect(() => {
+    getPredictions();
+  }, []);
+
+  if (isLoading)
+    return (
+      <p style={{ width: "max-content", margin: "56px auto" }}>Chargement..</p>
+    );
+
   return (
-    <Box mt={5} p={3}>
-      <TopCountriesTable />
-      <CountryMedalChart />
-    </Box>
+    <>
+      <TopCountriesTable predictions={predictions} />
+      <CountryMedalChart predictions={predictions} />
+    </>
   );
-}
+};
 
 export default Predictions;

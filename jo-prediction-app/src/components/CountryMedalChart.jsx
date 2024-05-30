@@ -1,53 +1,49 @@
 import { Autocomplete, Box, Container, TextField } from "@mui/material";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { Cell, Legend, Pie, PieChart, Tooltip } from "recharts";
-
-const mockMedalData = {
-  France: { gold: 50, silver: 40, bronze: 30 },
-  China: { gold: 45, silver: 35, bronze: 30 },
-  Russia: { gold: 30, silver: 30, bronze: 30 },
-};
-
-const countries = [
-  { country_name: "France" },
-  { country_name: "China" },
-  { country_name: "Russia" },
-];
 
 const COLORS = ["#FFD700", "#C0C0C0", "#CD7F32"];
 
-const CountryMedalChart = () => {
+const CountryMedalChart = ({ predictions }) => {
   const [selectedCountry, setSelectedCountry] = useState(null);
   const [medalData, setMedalData] = useState([]);
 
-  useEffect(() => {
-    if (selectedCountry) {
-      const data = mockMedalData[selectedCountry.country_name];
-      if (data) {
-        setMedalData([
-          { name: "Gold", value: data.gold },
-          { name: "Silver", value: data.silver },
-          { name: "Bronze", value: data.bronze },
-        ]);
-      }
-    }
-  }, [selectedCountry]);
-
   return (
-    <Container sx={{ marginTop: "4rem" }}>
+    <Container sx={{ margin: "4rem auto 256px" }}>
       <Autocomplete
-        options={countries}
-        getOptionLabel={(option) => option.country_name}
+        options={predictions.map((country) => country.country_name)}
+        getOptionLabel={(option) => option}
         renderInput={(params) => (
           <TextField {...params} label="Select Country" variant="outlined" />
         )}
         value={selectedCountry}
-        onChange={(event, newValue) => setSelectedCountry(newValue)}
+        onChange={(event, newValue) => {
+          setSelectedCountry(newValue);
+
+          if (newValue) {
+            const countryMedals = predictions.find(
+              (country) => country.country_name === newValue
+            );
+
+            setMedalData([
+              { name: "Gold", value: countryMedals.predicted_gold_medals },
+              { name: "Silver", value: countryMedals.predicted_silver_medals },
+              { name: "Bronze", value: countryMedals.predicted_bronze_medals },
+            ]);
+          }
+        }}
         style={{ marginBottom: 20 }}
       />
-      {medalData.length > 0 && (
-        <Box sx={{ display: "flex", justifyContent: "center", mt: 4 }}>
-          <PieChart width={400} height={400}>
+      {medalData.length > 0 ? (
+        <Box
+          sx={{
+            width: "100%",
+            display: "flex",
+            justifyContent: "center",
+            mt: 4,
+          }}
+        >
+          <PieChart width={500} height={500}>
             <Pie
               data={medalData}
               cx="50%"
@@ -66,9 +62,13 @@ const CountryMedalChart = () => {
               ))}
             </Pie>
             <Tooltip />
-            <Legend />
+            <Legend width={500} />
           </PieChart>
         </Box>
+      ) : (
+        <p style={{ width: "max-content", margin: "56px auto" }}>
+          Veuillez sélectionner un pays
+        </p>
       )}
     </Container>
   );
