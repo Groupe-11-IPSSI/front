@@ -1,8 +1,9 @@
 import { createTheme } from "@mui/material/styles";
+import { red, yellow, green, blue, grey } from "@mui/material/colors";
 
 const theme = createTheme({
   typography: {
-    fontFamily: "Roboto, Arial",
+    fontFamily: "Montserrat, Roboto, Arial", // Updated font family
     h1: {
       fontSize: "4rem",
       fontWeight: 700,
@@ -30,10 +31,35 @@ const theme = createTheme({
   },
   palette: {
     primary: {
-      main: "#0071c5",
+      main: "#ebd197", // Blue
     },
     secondary: {
-      main: "#FFD700",
+      main: "#0071c5", // Gold
+    },
+    error: {
+      main: red[700], // Red
+    },
+    warning: {
+      main: yellow[700], // Yellow
+    },
+    info: {
+      main: blue[700], // Darker Blue for contrast
+    },
+    success: {
+      main: green[700], // Green
+    },
+    grey: {
+      main: grey[900], // Black shade from grey
+    },
+  },
+  components: {
+    MuiButton: {
+      styleOverrides: {
+        root: {
+          textTransform: "none",
+          borderRadius: "8px",
+        },
+      },
     },
   },
 });

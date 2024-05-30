@@ -1,32 +1,35 @@
-// src/App.js
-import React, { useState, useEffect } from 'react';
 import {
-  Container,
-  Typography,
+  Autocomplete,
   Box,
+  Container,
+  Paper,
   Table,
   TableBody,
   TableCell,
   TableContainer,
   TableHead,
   TableRow,
-  Paper,
-  Autocomplete,
-  TextField
-} from '@mui/material';
+  TextField,
+  Typography,
+} from "@mui/material";
+import { useEffect, useState } from "react";
 
 function App() {
   const [predictions, setPredictions] = useState([]);
   const [selectedMedal, setSelectedMedal] = useState(null);
 
   const fetchMedals = async (selectedMedal) => {
-    const response = await fetch(`http://localhost:5000/medals?game_season=Winter${selectedMedal ? `&medal_type=${selectedMedal}` : ""}`);
+    const response = await fetch(
+      `http://localhost:5000/medals?game_season=Winter${
+        selectedMedal ? `&medal_type=${selectedMedal}` : ""
+      }`
+    );
     const data = await response.json();
     setPredictions(data);
   };
 
   useEffect(() => {
-  fetchMedals(selectedMedal);
+    fetchMedals(selectedMedal);
   }, [selectedMedal]);
 
   const medals = ["GOLD", "SILVER", "BRONZE"];
@@ -40,27 +43,29 @@ function App() {
 
   return (
     <Container>
-      <Typography variant="h2" component="h1" gutterBottom>
-        Jeux Olympique d'Hiver
-      </Typography>
-      <Box mt={5}>
-        <Typography variant="h5" gutterBottom>
-          Été Predictions by Medal
+      <Box mt={5} p={3}>
+        <Typography
+          variant="h4"
+          gutterBottom
+          align="center"
+          sx={{ marginBottom: "2rem" }}
+        >
+          Winter Predictions by Medal
         </Typography>
         <Autocomplete
           options={medals}
           getOptionLabel={(option) => option}
-          renderInput={(params) => <TextField {...params} label="Select Medal" variant="outlined" />}
+          renderInput={(params) => (
+            <TextField {...params} label="Select Medal" variant="outlined" />
+          )}
           value={selectedMedal}
           onChange={(event, newValue) => {
-            setSelectedMedal(newValue)
+            setSelectedMedal(newValue);
             fetchMedals(selectedMedal);
           }}
           style={{ marginBottom: 20 }}
         />
-        <Typography variant="h4" gutterBottom>
-          Predictions for Winter Sports
-        </Typography>
+
         <TableContainer component={Paper}>
           <Table>
             <TableHead>

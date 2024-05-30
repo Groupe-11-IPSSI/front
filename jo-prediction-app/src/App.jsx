@@ -4,7 +4,7 @@ import Header from "./components/Header";
 import HomePage from "./pages/HomePage";
 import WinterGames from "./pages/WinterGames";
 import SummerGames from "./pages/SummerGames";
-import Analysis from "./components/Analysis";
+import Analysis from "./pages/Analysis";
 import OlympicFacts from "./pages/OlympicFacts";
 import Predictions from "./pages/Predictions";
 
