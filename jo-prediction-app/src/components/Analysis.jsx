@@ -33,18 +33,26 @@ function Analysis() {
 
   useEffect(() => {
     const fetchData = async () => {
-      const response = await fetch(`http://localhost:5000/medals`);
-      const data = await response.json();
-      console.log(data);
-      setData(data);
+      const response = await fetch('http://localhost:5000/medals');
+      const rawData = await response.json();
+      console.log('Raw Data:', rawData);
+  
+      // Nettoyage des données
+      const cleanedData = rawData.filter(item => {
+        return item.country_name && !isNaN(item.GOLD) && !isNaN(item.SILVER) && !isNaN(item.BRONZE);
+      });
+  
+      console.log('Cleaned Data:', cleanedData);
+      setData(cleanedData);
     };
     fetchData();
   }, []);
+  
+  
 
   const processChartData = () => {
     const countries = {};
     data.forEach((item) => {
-      console.log(item.medal_type)
       if (!countries[item.country_name]) {
         countries[item.country_name] = { GOLD: 0, SILVER: 0, BRONZE: 0 };
       }
