@@ -1,9 +1,9 @@
+import { green, grey, red, yellow } from "@mui/material/colors";
 import { createTheme } from "@mui/material/styles";
-import { red, yellow, green, blue, grey } from "@mui/material/colors";
 
 const theme = createTheme({
   typography: {
-    fontFamily: "Montserrat, Roboto, Arial", // Updated font family
+    fontFamily: "Montserrat, Roboto, Arial",
     h1: {
       fontSize: "4rem",
       fontWeight: 700,
@@ -31,10 +31,10 @@ const theme = createTheme({
   },
   palette: {
     primary: {
-      main: "#ebd197", // Blue
+      main: "#002147", // Dark blue
     },
     secondary: {
-      main: "#0071c5", // Gold
+      main: "#FFDF00", // Yellow
     },
     error: {
       main: red[700], // Red
@@ -43,13 +43,17 @@ const theme = createTheme({
       main: yellow[700], // Yellow
     },
     info: {
-      main: blue[700], // Darker Blue for contrast
+      main: "#0071c5", // Blue
     },
     success: {
       main: green[700], // Green
     },
+    background: {
+      default: "#f9f9f9", // Light grey background
+      paper: "#FFFFFF", // White background for paper components
+    },
     grey: {
-      main: grey[900], // Black shade from grey
+      main: grey[900], // Dark grey for text
     },
   },
   breakpoints: {
@@ -67,6 +71,27 @@ const theme = createTheme({
         root: {
           textTransform: "none",
           borderRadius: "8px",
+          backgroundColor: "#004d7a", // Dark blue background
+          color: "#FFFFFF", // White text
+          "&:hover": {
+            backgroundColor: "#FFDF00", // Yellow on hover
+            color: "#002147", // Dark blue text on hover
+          },
+        },
+      },
+    },
+    MuiAppBar: {
+      styleOverrides: {
+        root: {
+          backgroundColor: "#004d7a", // Dark blue AppBar background
+        },
+      },
+    },
+    MuiDrawer: {
+      styleOverrides: {
+        paper: {
+          backgroundColor: "#004d7a", // Same dark blue background as AppBar
+          color: "#FFFFFF", // White text in the drawer
         },
       },
     },

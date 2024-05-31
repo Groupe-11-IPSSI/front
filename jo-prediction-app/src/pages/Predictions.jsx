@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
-import TopCountriesTable from "../components/TopCountriesTable";
 import CountryMedalChart from "../components/CountryMedalChart";
+import TopCountriesTable from "../components/TopCountriesTable";
 
 const Predictions = () => {
   const [predictions, setPredictions] = useState([]);
@@ -20,7 +20,7 @@ const Predictions = () => {
 
   if (isLoading)
     return (
-      <p style={{ width: "max-content", margin: "56px auto" }}>Chargement..</p>
+      <p style={{ width: "max-content", margin: "56px auto" }}>Loading..</p>
     );
 
   return (

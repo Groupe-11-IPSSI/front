@@ -1,5 +1,6 @@
-import React, { useEffect, useRef } from "react";
 import { Box, Button, Typography } from "@mui/material";
+import { useEffect, useRef } from "react";
+import { Link } from "react-router-dom";
 import Typed from "typed.js";
 import videoUrl from "../assets/videos/jo_is_come.mp4";
 
@@ -8,7 +9,10 @@ function HomePage() {
 
   useEffect(() => {
     const typedJS = new Typed(typedJSRef.current, {
-      strings: ["Predicting the Future of the Olympic Games", "Join us in Paris 2024"],
+      strings: [
+        "Predicting the Future of the Olympic Games",
+        "Join us in Paris 2024",
+      ],
       typeSpeed: 70,
       backSpeed: 50,
       backDelay: 500,
@@ -22,7 +26,6 @@ function HomePage() {
   return (
     <Box
       sx={{
-        // position: "relative",
         width: "100%",
         height: "80vh",
         display: "flex",
@@ -42,7 +45,8 @@ function HomePage() {
       }}
       xl={{
         maxWidth: "none",
-      }}>
+      }}
+    >
       <Box
         component="video"
         src={videoUrl}
@@ -58,8 +62,9 @@ function HomePage() {
           height: "100%",
           objectFit: "cover",
           zIndex: -1,
-        }}>
-        Votre navigateur ne supporte pas les vidéos HTML5.
+        }}
+      >
+        Your browser does not support HTML5 videos.
       </Box>
       <Box
         sx={{
@@ -78,8 +83,15 @@ function HomePage() {
         <Typography variant="h5" sx={{ mb: 4 }}>
           <span ref={typedJSRef} />
         </Typography>
-        <Button variant="contained" color="secondary" size="large" sx={{ mt: 4 }}>
-          Get Started
+        <Button
+          variant="contained"
+          color="secondary"
+          size="large"
+          sx={{ mt: 4 }}
+          component={Link}
+          to="/predictions"
+        >
+          Predictions
         </Button>
       </Box>
     </Box>

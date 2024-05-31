@@ -1,7 +1,6 @@
 import { Box, Typography } from "@mui/material";
 import { styled } from "@mui/system";
 
-// Styles pour le parchemin
 const ScrollBox = styled(Box)(({ theme }) => ({
   backgroundImage: "url(/src/assets/olympics-parchment.jpg)",
   backgroundSize: "cover",
@@ -55,28 +54,60 @@ function OlympicFacts() {
       </Typography>
       <ScrollBox>
         <Typography variant="body1">
-          Fact 1: The Olympic Games were first held in ancient Greece.
+          Fact 1: The Olympic Games were first held in ancient Greece in 776 BC.
         </Typography>
       </ScrollBox>
       <ScrollBox>
         <Typography variant="body1">
           Fact 2: The five rings of the Olympic logo represent the five
-          continents.
+          inhabited continents.
         </Typography>
       </ScrollBox>
       <ScrollBox>
         <Typography variant="body1">
-          Fact 3: The Olympic Games have been held in 23 countries.
+          Fact 3: The modern Olympic Games were revived in 1896 by Pierre de
+          Coubertin.
         </Typography>
       </ScrollBox>
       <ScrollBox>
         <Typography variant="body1">
-          Fact 4: The Olympic Games have been held in 42 cities.
+          Fact 4: The first Winter Olympics were held in Chamonix, France, in
+          1924.
         </Typography>
       </ScrollBox>
       <ScrollBox>
         <Typography variant="body1">
-          Fact 5: The Olympic Games have been held 50 times.
+          Fact 5: The Olympics have been held in 23 countries.
+        </Typography>
+      </ScrollBox>
+      <ScrollBox>
+        <Typography variant="body1">
+          Fact 6: The United States has won the most Olympic medals, with over
+          2,500.
+        </Typography>
+      </ScrollBox>
+      <ScrollBox>
+        <Typography variant="body1">
+          Fact 7: The 2020 Tokyo Olympics were the first to be postponed,
+          occurring in 2021 due to the COVID-19 pandemic.
+        </Typography>
+      </ScrollBox>
+      <ScrollBox>
+        <Typography variant="body1">
+          Fact 8: The Olympic flame is lit at Olympia, Greece, and travels to
+          the host city.
+        </Typography>
+      </ScrollBox>
+      <ScrollBox>
+        <Typography variant="body1">
+          Fact 9: The first official Olympic mascot was Waldi, the dachshund, in
+          1972.
+        </Typography>
+      </ScrollBox>
+      <ScrollBox>
+        <Typography variant="body1">
+          Fact 10: The longest-standing Olympic record is held by Bob Beamon for
+          the long jump, set in 1968.
         </Typography>
       </ScrollBox>
     </Box>
