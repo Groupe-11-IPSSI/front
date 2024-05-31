@@ -1,5 +1,6 @@
-import { useEffect, useRef } from "react";
 import { Box, Button, Typography } from "@mui/material";
+import { useEffect, useRef } from "react";
+import { Link } from "react-router-dom";
 import Typed from "typed.js";
 import videoUrl from "../assets/videos/jo_is_come.mp4";
 
@@ -25,7 +26,6 @@ function HomePage() {
   return (
     <Box
       sx={{
-        // position: "relative",
         width: "100%",
         height: "80vh",
         display: "flex",
@@ -64,7 +64,7 @@ function HomePage() {
           zIndex: -1,
         }}
       >
-        Votre navigateur ne supporte pas les vidéos HTML5.
+        Your browser does not support HTML5 videos.
       </Box>
       <Box
         sx={{
@@ -88,8 +88,10 @@ function HomePage() {
           color="secondary"
           size="large"
           sx={{ mt: 4 }}
+          component={Link}
+          to="/predictions"
         >
-          Get Started
+          Predictions
         </Button>
       </Box>
     </Box>

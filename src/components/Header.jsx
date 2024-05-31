@@ -9,12 +9,12 @@ import {
   ListItem,
   ListItemText,
   Toolbar,
-  Typography,
   useMediaQuery,
   useTheme,
 } from "@mui/material";
 import { useState } from "react";
 import { Link } from "react-router-dom";
+import logo from "../assets/logo.png";
 
 function Header() {
   const theme = useTheme();
@@ -26,7 +26,6 @@ function Header() {
   };
 
   const menuItems = [
-    { text: "Home", link: "/" },
     { text: "Analysis", link: "/analysis" },
     { text: "Olympic Facts", link: "/facts" },
     { text: "Predictions", link: "/predictions" },
@@ -36,7 +35,13 @@ function Header() {
     <Drawer anchor="left" open={drawerOpen} onClose={handleDrawerToggle}>
       <List>
         {menuItems.map((item) => (
-          <ListItem button component={Link} to={item.link} key={item.text} onClick={handleDrawerToggle}>
+          <ListItem
+            button
+            component={Link}
+            to={item.link}
+            key={item.text}
+            onClick={handleDrawerToggle}
+          >
             <ListItemText primary={item.text} />
           </ListItem>
         ))}
@@ -45,20 +50,51 @@ function Header() {
   );
 
   return (
-    <AppBar position="static" sx={{ zIndex: 1000 }}>
-      <Toolbar>
+    <AppBar position="static" sx={{ zIndex: 1000, minHeight: "90px" }}>
+      <Toolbar
+        sx={{
+          display: "grid",
+          gridTemplateColumns: "1fr auto 1fr",
+          alignItems: "center",
+        }}
+      >
         {isMobile && (
-          <IconButton edge="start" color="inherit" aria-label="menu" onClick={handleDrawerToggle} sx={{ mr: 2 }}>
+          <IconButton
+            edge="start"
+            color="inherit"
+            aria-label="menu"
+            onClick={handleDrawerToggle}
+            sx={{ gridColumn: "1 / 2" }}
+          >
             <MenuIcon />
           </IconButton>
         )}
-        <Box>
-          <Typography variant="h6">JO Prediction App</Typography>
+        <Box
+          component={Link}
+          to="/"
+          sx={{
+            gridColumn: "2 / 3",
+            display: "flex",
+            justifyContent: "center",
+          }}
+        >
+          <img src={logo} alt="JO 2024" style={{ height: 90 }} />
         </Box>
         {!isMobile && (
-          <Box sx={{ flexGrow: 1, display: "flex", justifyContent: "flex-end" }}>
+          <Box
+            sx={{
+              display: "flex",
+              justifyContent: "flex-end",
+              gridColumn: "3 / 4",
+            }}
+          >
             {menuItems.map((item) => (
-              <Button color="inherit" component={Link} to={item.link} key={item.text}>
+              <Button
+                color="inherit"
+                component={Link}
+                to={item.link}
+                key={item.text}
+              >
                 {item.text}
               </Button>
             ))}

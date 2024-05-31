@@ -3,7 +3,7 @@ body {
   font-family: "Roboto", Arial, sans-serif;
   height: 100%;
   width: 100%;
-  overflow: hidden;
+  overflow: auto;
   display: flex;
   flex-direction: column;
     max-width: none;

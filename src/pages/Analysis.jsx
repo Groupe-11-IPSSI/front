@@ -1,28 +1,28 @@
-import { useState, useEffect } from "react";
 import {
+  Autocomplete,
   Box,
   Container,
-  Typography,
-  TextField,
-  Autocomplete,
+  Paper,
   Table,
   TableBody,
   TableCell,
   TableContainer,
   TableHead,
   TableRow,
-  Paper,
+  TextField,
+  Typography,
 } from "@mui/material";
+import { useEffect, useState } from "react";
 import {
-  BarChart,
   Bar,
-  LineChart,
+  BarChart,
+  CartesianGrid,
+  Legend,
   Line,
+  LineChart,
+  Tooltip,
   XAxis,
   YAxis,
-  CartesianGrid,
-  Tooltip,
-  Legend,
 } from "recharts";
 
 const Analysis = () => {
@@ -43,7 +43,6 @@ const Analysis = () => {
   const getMedalsPerYear = async (value) => {
     const response = await fetch(`${apiUrl}/medals?year=${value}`);
     const data = await response.json();
-    console.log(`Medals data for year ${value}:`, data); // Debugging
     setYearlyMedalsData(data);
     setIsMedalsPerYearLoading(false);
   };
@@ -51,7 +50,6 @@ const Analysis = () => {
   const getMedalsPerCountry = async (value) => {
     const response = await fetch(`${apiUrl}/medals?country_name=${value}`);
     const data = await response.json();
-    console.log(`Medals data for country ${value}:`, data); // Debugging
     setCountryMedals(data);
   };
 
@@ -59,12 +57,10 @@ const Analysis = () => {
     if (value) {
       const response = await fetch(`${apiUrl}/athletes?country_name=${value}`);
       const data = await response.json();
-      console.log(`Athletes data for country ${value}:`, data); // Debugging
       setAthletes(data);
     } else {
       const response = await fetch(`${apiUrl}/athletes`);
       const data = await response.json();
-      console.log("All athletes data:", data); // Debugging
       setAthletes(data);
     }
     setIsAthletesLoading(false);
@@ -73,7 +69,6 @@ const Analysis = () => {
   const getAllYears = async () => {
     const response = await fetch(`${apiUrl}/years`);
     const data = await response.json();
-    console.log("All years data:", data); // Debugging
     setYears(data);
     setIsYearsLoading(false);
   };
@@ -81,7 +76,6 @@ const Analysis = () => {
   const getAllCountries = async () => {
     const response = await fetch(`${apiUrl}/countries`);
     const data = await response.json();
-    console.log("All countries data:", data); // Debugging
     setCountries(data);
     setIsCountriesLoading(false);
   };
@@ -98,10 +92,11 @@ const Analysis = () => {
     isCountriesLoading ||
     isAthletesLoading ||
     isMedalsPerYearLoading
-  )
+  ) {
     return (
-      <p style={{ width: "max-content", margin: "56px auto" }}>Chargement...</p>
+      <p style={{ width: "max-content", margin: "56px auto" }}>Loading...</p>
     );
+  }
 
   return (
     <Container sx={{ overflowY: "auto", maxHeight: "100vh", paddingBottom: "2rem" }}>
@@ -117,8 +112,8 @@ const Analysis = () => {
       <Box sx={{ marginBottom: "4rem" }}>
         <Autocomplete
           options={years}
-          getOptionLabel={(option) => `${option}`} // Ensure it returns a string
-          isOptionEqualToValue={(option, value) => option === value} // Custom equality test
+          getOptionLabel={(option) => `${option}`}
+          isOptionEqualToValue={(option, value) => option === value}
           renderInput={(params) => (
             <TextField {...params} label="Select Year" variant="outlined" />
           )}
@@ -185,8 +180,8 @@ const Analysis = () => {
       <Box sx={{ marginBottom: "4rem" }}>
         <Autocomplete
           options={countries}
-          getOptionLabel={(option) => option} // Ensure it returns a string
-          isOptionEqualToValue={(option, value) => option === value} // Custom equality test
+          getOptionLabel={(option) => option}
+          isOptionEqualToValue={(option, value) => option === value}
           renderInput={(params) => (
             <TextField {...params} label="Select Country" variant="outlined" />
           )}

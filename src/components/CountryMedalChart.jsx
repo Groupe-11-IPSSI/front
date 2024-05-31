@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 import { Autocomplete, Box, Container, TextField } from "@mui/material";
 import { useState } from "react";
 import { Cell, Legend, Pie, PieChart, Tooltip } from "recharts";
@@ -67,7 +68,7 @@ const CountryMedalChart = ({ predictions }) => {
         </Box>
       ) : (
         <p style={{ width: "max-content", margin: "56px auto" }}>
-          Veuillez sélectionner un pays
+          Select a country
         </p>
       )}
     </Container>
