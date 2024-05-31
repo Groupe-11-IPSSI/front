@@ -104,7 +104,7 @@ const Analysis = () => {
     );
 
   return (
-    <Container>
+    <Container sx={{ overflowY: "auto", maxHeight: "100vh", paddingBottom: "2rem" }}>
       <Typography
         variant="h4"
         gutterBottom
