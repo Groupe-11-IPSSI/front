@@ -1,5 +1,8 @@
 # JO Prediction App
 
+# Lien en production
+https://jo-predict-11.vercel.app/
+
 ## Description
 L'application **JO Prediction App** a pour objectif de fournir des prédictions sur les résultats des Jeux Olympiques 2024, ainsi que des informations générales et des faits intéressants sur les Jeux Olympiques. Elle permet aux utilisateurs de consulter les pays participants, les hôtes des Jeux, les années des compétitions, et de faire des prédictions sur les médailles.
 
@@ -68,6 +71,7 @@ L'application **JO Prediction App** a pour objectif de fournir des prédictions 
 
 ## Structure du Projet
 
+```txt
 src/
 ├── assets/
 ├── components/
@@ -86,7 +90,7 @@ src/
 package.json
 vite.config.js
 yarn.lock
-
+```
 
 ### Code Backend (app.py)
 Le code backend gère les routes pour obtenir les informations sur les pays, les hôtes, les années et les prédictions de médailles. Il utilise un pool de connexions pour optimiser les connexions à la base de données PostgreSQL.
