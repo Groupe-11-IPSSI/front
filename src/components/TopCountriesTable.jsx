@@ -34,19 +34,31 @@ const TopCountriesTable = ({ predictions }) => {
             </TableRow>
           </TableHead>
           <TableBody>
-            {predictions.map((country, index) => (
-              <TableRow key={index}>
-                <TableCell>{country.country_name}</TableCell>
-                <TableCell>
-                  {country.predicted_gold_medals +
-                    country.predicted_silver_medals +
-                    country.predicted_bronze_medals}
-                </TableCell>
-                <TableCell>{country.predicted_gold_medals}</TableCell>
-                <TableCell>{country.predicted_silver_medals}</TableCell>
-                <TableCell>{country.predicted_bronze_medals}</TableCell>
-              </TableRow>
-            ))}
+            {predictions
+              .sort((a, b) => {
+                const sumA =
+                  a.predicted_gold_medals +
+                  a.predicted_silver_medals +
+                  a.predicted_bronze_medals;
+                const sumB =
+                  b.predicted_gold_medals +
+                  b.predicted_silver_medals +
+                  b.predicted_bronze_medals;
+                return sumB - sumA;
+              })
+              .map((country, index) => (
+                <TableRow key={index}>
+                  <TableCell>{country.country_name}</TableCell>
+                  <TableCell>
+                    {country.predicted_gold_medals +
+                      country.predicted_silver_medals +
+                      country.predicted_bronze_medals}
+                  </TableCell>
+                  <TableCell>{country.predicted_gold_medals}</TableCell>
+                  <TableCell>{country.predicted_silver_medals}</TableCell>
+                  <TableCell>{country.predicted_bronze_medals}</TableCell>
+                </TableRow>
+              ))}
           </TableBody>
         </Table>
       </TableContainer>
