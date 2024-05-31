@@ -1,26 +1,66 @@
+import React, { useEffect, useRef } from "react";
 import { Box, Button, Typography } from "@mui/material";
-import backgroundImage from "../assets/paris2024-background.jpg";
+import Typed from "typed.js";
+import videoUrl from "../assets/videos/jo_is_come.mp4";
 
 function HomePage() {
+  const typedJSRef = useRef(null);
+
+  useEffect(() => {
+    const typedJS = new Typed(typedJSRef.current, {
+      strings: ["Predicting the Future of the Olympic Games", "Join us in Paris 2024"],
+      typeSpeed: 70,
+      backSpeed: 50,
+      backDelay: 500,
+      startDelay: 500,
+      loop: true,
+    });
+
+    return () => typedJS.destroy();
+  }, []);
+
   return (
     <Box
       sx={{
-        position: "relative",
+        // position: "relative",
         width: "100%",
-        height: "100vh",
+        height: "80vh",
         display: "flex",
         flexDirection: "column",
         alignItems: "center",
         justifyContent: "center",
         color: "white",
         textAlign: "center",
-        backgroundImage: `url(${backgroundImage})`,
-        backgroundSize: "cover",
-        backgroundPosition: "center",
-        backgroundRepeat: "no-repeat",
         overflow: "hidden",
+        paddingLeft: "0px",
+        paddingTop: "10px",
+        paddingRight: "0px",
+        maxWidth: "none",
       }}
-    >
+      lg={{
+        maxWidth: "none",
+      }}
+      xl={{
+        maxWidth: "none",
+      }}>
+      <Box
+        component="video"
+        src={videoUrl}
+        autoPlay
+        loop
+        muted
+        playsInline
+        sx={{
+          position: "absolute",
+          top: 0,
+          left: 0,
+          width: "100%",
+          height: "100%",
+          objectFit: "cover",
+          zIndex: -1,
+        }}>
+        Votre navigateur ne supporte pas les vidéos HTML5.
+      </Box>
       <Box
         sx={{
           position: "absolute",
@@ -31,19 +71,14 @@ function HomePage() {
           backgroundColor: "rgba(0, 0, 0, 0.5)",
         }}
       />
-      <Box sx={{ position: "relative", zIndex: 1, p: 3 }}>
+      <Box sx={{ position: "relative", zIndex: 1, p: 3, width: "100%" }}>
         <Typography variant="h2" sx={{ fontWeight: 700, mb: 2 }}>
           Paris 2024
         </Typography>
-        <Typography variant="h5" gutterBottom>
-          Predicting the Future of the Olympic Games
+        <Typography variant="h5" sx={{ mb: 4 }}>
+          <span ref={typedJSRef} />
         </Typography>
-        <Button
-          variant="contained"
-          color="secondary"
-          size="large"
-          sx={{ mt: 4 }}
-        >
+        <Button variant="contained" color="secondary" size="large" sx={{ mt: 4 }}>
           Get Started
         </Button>
       </Box>

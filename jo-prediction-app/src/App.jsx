@@ -1,5 +1,5 @@
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
-import { Container, CssBaseline } from "@mui/material";
+import { Box, Container, CssBaseline } from "@mui/material";
 import Header from "./components/Header";
 import HomePage from "./pages/HomePage";
 import WinterGames from "./pages/WinterGames";
@@ -13,7 +13,7 @@ function App() {
     <Router>
       <CssBaseline />
       <Header />
-      <Container>
+      <Container sx={{ width: "100%", maxWidth: "none" }} xl={{ maxWidth: "none" }}>
         <Routes>
           <Route path="/" element={<HomePage />} />
           <Route path="/winter" element={<WinterGames />} />

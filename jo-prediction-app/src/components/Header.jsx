@@ -36,13 +36,7 @@ function Header() {
     <Drawer anchor="left" open={drawerOpen} onClose={handleDrawerToggle}>
       <List>
         {menuItems.map((item) => (
-          <ListItem
-            button
-            component={Link}
-            to={item.link}
-            key={item.text}
-            onClick={handleDrawerToggle}
-          >
+          <ListItem button component={Link} to={item.link} key={item.text} onClick={handleDrawerToggle}>
             <ListItemText primary={item.text} />
           </ListItem>
         ))}
@@ -51,16 +45,10 @@ function Header() {
   );
 
   return (
-    <AppBar position="static">
+    <AppBar position="static" sx={{ zIndex: 1000 }}>
       <Toolbar>
         {isMobile && (
-          <IconButton
-            edge="start"
-            color="inherit"
-            aria-label="menu"
-            onClick={handleDrawerToggle}
-            sx={{ mr: 2 }}
-          >
+          <IconButton edge="start" color="inherit" aria-label="menu" onClick={handleDrawerToggle} sx={{ mr: 2 }}>
             <MenuIcon />
           </IconButton>
         )}
@@ -68,16 +56,9 @@ function Header() {
           <Typography variant="h6">JO Prediction App</Typography>
         </Box>
         {!isMobile && (
-          <Box
-            sx={{ flexGrow: 1, display: "flex", justifyContent: "flex-end" }}
-          >
+          <Box sx={{ flexGrow: 1, display: "flex", justifyContent: "flex-end" }}>
             {menuItems.map((item) => (
-              <Button
-                color="inherit"
-                component={Link}
-                to={item.link}
-                key={item.text}
-              >
+              <Button color="inherit" component={Link} to={item.link} key={item.text}>
                 {item.text}
               </Button>
             ))}
