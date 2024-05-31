@@ -38,48 +38,51 @@ const Analysis = () => {
   const [isAthletesLoading, setIsAthletesLoading] = useState(true);
   const [isMedalsPerYearLoading, setIsMedalsPerYearLoading] = useState(true);
 
-  const getMedalsPerYear = async (value) => {
-    const response = await fetch(`http://localhost:5000/medals?year=${value}`);
+  const apiUrl = import.meta.env.VITE_API_URL;
 
-    setYearlyMedalsData(await response.json());
+  const getMedalsPerYear = async (value) => {
+    const response = await fetch(`${apiUrl}/medals?year=${value}`);
+    const data = await response.json();
+    console.log(`Medals data for year ${value}:`, data); // Debugging
+    setYearlyMedalsData(data);
     setIsMedalsPerYearLoading(false);
   };
 
   const getMedalsPerCountry = async (value) => {
-    const response = await fetch(
-      `http://localhost:5000/medals?country_name=${value}`
-    );
-
-    setCountryMedals(await response.json());
+    const response = await fetch(`${apiUrl}/medals?country_name=${value}`);
+    const data = await response.json();
+    console.log(`Medals data for country ${value}:`, data); // Debugging
+    setCountryMedals(data);
   };
 
   const getAthletes = async (value) => {
     if (value) {
-      const response = await fetch(
-        `http://localhost:5000/athletes?country_name=${value}`
-      );
-
-      setAthletes(await response.json());
+      const response = await fetch(`${apiUrl}/athletes?country_name=${value}`);
+      const data = await response.json();
+      console.log(`Athletes data for country ${value}:`, data); // Debugging
+      setAthletes(data);
     } else {
-      const response = await fetch("http://localhost:5000/athletes");
-
-      setAthletes(await response.json());
+      const response = await fetch(`${apiUrl}/athletes`);
+      const data = await response.json();
+      console.log("All athletes data:", data); // Debugging
+      setAthletes(data);
     }
-
     setIsAthletesLoading(false);
   };
 
   const getAllYears = async () => {
-    const response = await fetch("http://localhost:5000/years");
-
-    setYears(await response.json());
+    const response = await fetch(`${apiUrl}/years`);
+    const data = await response.json();
+    console.log("All years data:", data); // Debugging
+    setYears(data);
     setIsYearsLoading(false);
   };
 
   const getAllCountries = async () => {
-    const response = await fetch("http://localhost:5000/countries");
-
-    setCountries(await response.json());
+    const response = await fetch(`${apiUrl}/countries`);
+    const data = await response.json();
+    console.log("All countries data:", data); // Debugging
+    setCountries(data);
     setIsCountriesLoading(false);
   };
 
@@ -97,7 +100,7 @@ const Analysis = () => {
     isMedalsPerYearLoading
   )
     return (
-      <p style={{ width: "max-content", margin: "56px auto" }}>Chargement..</p>
+      <p style={{ width: "max-content", margin: "56px auto" }}>Chargement...</p>
     );
 
   return (
@@ -113,15 +116,15 @@ const Analysis = () => {
 
       <Box sx={{ marginBottom: "4rem" }}>
         <Autocomplete
-          options={years.map((year) => `${year}`)}
-          getOptionLabel={(option) => option}
+          options={years}
+          getOptionLabel={(option) => `${option}`} // Ensure it returns a string
+          isOptionEqualToValue={(option, value) => option === value} // Custom equality test
           renderInput={(params) => (
             <TextField {...params} label="Select Year" variant="outlined" />
           )}
-          value={selectedCountry}
+          value={selectedYear}
           onChange={(event, newValue) => {
             setSelectedYear(newValue);
-
             getMedalsPerYear(newValue);
           }}
           style={{ marginBottom: 56 }}
@@ -132,7 +135,7 @@ const Analysis = () => {
             <Typography variant="h5" gutterBottom>
               Country with the Most Medals in {selectedYear}
             </Typography>
-            {yearlyMedalsData.length > 0 && (
+            {yearlyMedalsData.length > 0 ? (
               <TableContainer component={Paper}>
                 <Table>
                   <TableHead>
@@ -154,6 +157,8 @@ const Analysis = () => {
                   </TableBody>
                 </Table>
               </TableContainer>
+            ) : (
+              <Typography>No data available for {selectedYear}</Typography>
             )}
 
             <Typography variant="h5" gutterBottom style={{ marginTop: "4rem" }}>
@@ -165,7 +170,7 @@ const Analysis = () => {
               data={yearlyMedalsData.slice(0, 10)}
             >
               <CartesianGrid strokeDasharray="3 3" />
-              <XAxis dataKey="country_name" />
+              <XAxis dataKey="country_name" tick={{ fontSize: 14 }} />
               <YAxis />
               <Tooltip />
               <Legend />
@@ -180,7 +185,8 @@ const Analysis = () => {
       <Box sx={{ marginBottom: "4rem" }}>
         <Autocomplete
           options={countries}
-          getOptionLabel={(option) => option}
+          getOptionLabel={(option) => option} // Ensure it returns a string
+          isOptionEqualToValue={(option, value) => option === value} // Custom equality test
           renderInput={(params) => (
             <TextField {...params} label="Select Country" variant="outlined" />
           )}
@@ -200,7 +206,7 @@ const Analysis = () => {
             </Typography>
             <LineChart width={1100} height={500} data={countryMedals}>
               <CartesianGrid strokeDasharray="3 3" />
-              <XAxis dataKey="year" />
+              <XAxis dataKey="year" tick={{ fontSize: 14 }} />
               <YAxis />
               <Tooltip />
               <Legend />
@@ -228,15 +234,13 @@ const Analysis = () => {
               </TableRow>
             </TableHead>
             <TableBody>
-              {athletes.map((athlete, index) => {
-                return (
-                  <TableRow key={index}>
-                    <TableCell>{athlete.athlete_full_name}</TableCell>
-                    <TableCell>{athlete.country_name}</TableCell>
-                    <TableCell>{athlete.total_medals}</TableCell>
-                  </TableRow>
-                );
-              })}
+              {athletes.map((athlete, index) => (
+                <TableRow key={index}>
+                  <TableCell>{athlete.athlete_full_name}</TableCell>
+                  <TableCell>{athlete.country_name}</TableCell>
+                  <TableCell>{athlete.total_medals}</TableCell>
+                </TableRow>
+              ))}
             </TableBody>
           </Table>
         </TableContainer>

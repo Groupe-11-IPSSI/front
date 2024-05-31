@@ -5,9 +5,10 @@ import CountryMedalChart from "../components/CountryMedalChart";
 const Predictions = () => {
   const [predictions, setPredictions] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
+  const apiUrl = import.meta.env.VITE_API_URL;
 
   const getPredictions = async () => {
-    const response = await fetch("http://localhost:5000/predict");
+    const response = await fetch(`${apiUrl}/predict`);
 
     setPredictions(await response.json());
     setIsLoading(false);
