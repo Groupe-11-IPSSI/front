@@ -28,7 +28,6 @@ L'application **JO Prediction App** a pour objectif de fournir des prédictions 
 1. Clonez le dépôt :
     ```sh
     git clone hhttps://github.com/Groupe-11-IPSSI/front.git
-    cd jo-prediction-app
     ```
 
 2. Installez les dépendances du frontend :
@@ -40,14 +39,15 @@ L'application **JO Prediction App** a pour objectif de fournir des prédictions 
     npm install
     ```
 
-3. Installez les dépendances du backend :
+3. Clone le dépôt github du back et l'installez les dépendances du backend :
+    lien : [Clone le répos](https://github.com/Groupe-11-IPSSI/back) : https://github.com/Groupe-11-IPSSI/back
     ```sh
     pip install -r requirements.txt
     ```
 
 4. Configurez les variables d'environnement en créant un fichier `.env` à la racine du projet et en y ajoutant les variables suivantes :
     ```
-    VITE_API_URL=http://hackathon_jo_2024.find-auto-part.com
+    VITE_API_URL=http://localhost:8080
     DB_HOST=votre_hote
     DB_NAME=nom_de_la_base
     DB_USER=utilisateur
