@@ -27,7 +27,7 @@ L'application **JO Prediction App** a pour objectif de fournir des prédictions 
 ## Installation
 1. Clonez le dépôt :
     ```sh
-    git clone https://github.com/votre-utilisateur/jo-prediction-app.git
+    git clone hhttps://github.com/Groupe-11-IPSSI/front.git
     cd jo-prediction-app
     ```
 
